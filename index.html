@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLIMATE GUARDIANS</title>
+    <link rel="icon" type="image/x-icon" href="./Favicon_Icon.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <!-- Space Background -->
+    <div class="space-background"></div>
+    <div class="stars" id="stars-container"></div>
+
+    <!-- Earth Animation -->
+    <div class="earth-container">
+      <!-- Earth will be created dynamically by app.js -->
+    </div>
+
+    <!-- Content -->
+    <div class="content-wrapper">
+      <!-- Header -->
+      <header class="nasa-header">
+        <div class="container">
+          <div
+            class="d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-start text-center text-md-start"
+          >
+            <div class="d-flex align-items-center mb-2 mb-md-0">
+              <img
+                src="https://www.nasa.gov/wp-content/uploads/2023/04/nasa-logo-web-rgb.png"
+                alt="NASA Logo"
+                class="nasa-logo"
+              />
+              <div class="ms-0 ms-md-3">
+                <h1 class="h4 mb-0">CLIMATE GUARDIANS</h1>
+                <p class="mb-0 small">
+                  Historical Weather Probability Dashboard
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container text-center">
+          <h1 class="display-5 display-md-4 display-lg-3 fw-bold mb-3 mb-md-4">
+            Plan Your Outdoor Activities with Confidence
+          </h1>
+          <p class="lead mb-3 mb-md-4">
+            Using NASA Earth observation data to determine the likelihood of
+            adverse weather conditions for your specific location and date
+          </p>
+          <a href="#query-section" class="btn btn-light btn-lg px-4"
+            >Get Started</a
+          >
+        </div>
+      </section>
+
+      <!-- Main Content -->
+      <main class="container my-4 my-md-5">
+        <!-- Query Section -->
+        <section id="query-section" class="mb-4 mb-md-5">
+          <div class="row g-3 g-md-4">
+            <div class="col-12 col-lg-8">
+              <div class="card">
+                <div class="card-header">
+                  <h2 class="h5 mb-0">Weather Probability Query</h2>
+                </div>
+                <div class="card-body">
+                  <form id="weather-query-form">
+                    <div class="row g-2 g-md-3 mb-3">
+                      <div class="col-12 col-md-6">
+                        <label for="location-input" class="form-label"
+                          >Location (Ex: Surat,Gujarat)</label
+                        >
+                        <div class="input-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="location-input"
+                            placeholder="Enter city, address, or coordinates"
+                          />
+                          <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            id="current-location-btn"
+                            title="Use current location"
+                          >
+                            <i class="bi bi-geo-alt"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <label for="date-input" class="form-label">Date</label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="date-input"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label"
+                        >Select Weather Conditions to Analyze</label
+                      >
+                      <div class="row g-2 g-sm-3">
+                        <div class="col-6 col-sm-4 col-md-3">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="very-hot"
+                              checked
+                            />
+                            <label class="form-check-label" for="very-hot">
+                              <i class="bi bi-thermometer-sun weather-icon"></i>
+                              Very Hot
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-6 col-sm-4 col-md-3">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="very-cold"
+                              checked
+                            />
+                            <label class="form-check-label" for="very-cold">
+                              <i
+                                class="bi bi-thermometer-snow weather-icon"
+                              ></i>
+                              Very Cold
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-6 col-sm-4 col-md-3">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="very-windy"
+                              checked
+                            />
+                            <label class="form-check-label" for="very-windy">
+                              <i class="bi bi-wind weather-icon"></i> Very Windy
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-6 col-sm-4 col-md-3">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="very-wet"
+                              checked
+                            />
+                            <label class="form-check-label" for="very-wet">
+                              <i
+                                class="bi bi-cloud-rain-heavy weather-icon"
+                              ></i>
+                              Very Wet
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-6 col-sm-4 col-md-3">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="very-uncomfortable"
+                              checked
+                            />
+                            <label
+                              class="form-check-label"
+                              for="very-uncomfortable"
+                            >
+                              <i class="bi bi-emoji-dizzy weather-icon"></i>
+                              Very Uncomfortable
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="activity-type" class="form-label"
+                        >Activity Type (Optional)</label
+                      >
+                      <select class="form-select" id="activity-type">
+                        <option value="">Select an activity</option>
+                        <option value="hiking">Hiking</option>
+                        <option value="beach">Beach Day</option>
+                        <option value="fishing">Fishing</option>
+                        <option value="picnic">Picnic</option>
+                        <option value="sightseeing">Sightseeing</option>
+                        <option value="camping">Camping</option>
+                        <option value="sports">Outdoor Sports</option>
+                      </select>
+                    </div>
+
+                    <button
+                      type="submit"
+                      class="btn btn-nasa w-100 w-md-auto"
+                      id="submit-btn"
+                    >
+                      <span
+                        class="spinner-border spinner-border-sm d-none"
+                        id="submit-spinner"
+                      ></span>
+                      Get Weather Probability
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              <div class="card mt-3 mt-md-4">
+                <div class="card-header">
+                  <h2 class="h5 mb-0">Find From Map</h2>
+                </div>
+                <div class="card-body p-0">
+                  <div id="map"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-4">
+              <div class="card">
+                <div class="card-header">
+                  <h2 class="h5 mb-0">How It Works</h2>
+                </div>
+                <div class="card-body">
+                  <ol class="list-group list-group-numbered">
+                    <li
+                      class="list-group-item border-0 px-0 py-2"
+                      style="background: transparent; color: white"
+                    >
+                      Select your desired location using the map or search
+                    </li>
+                    <li
+                      class="list-group-item border-0 px-0 py-2"
+                      style="background: transparent; color: white"
+                    >
+                      Choose the date for your planned activity
+                    </li>
+                    <li
+                      class="list-group-item border-0 px-0 py-2"
+                      style="background: transparent; color: white"
+                    >
+                      Select which weather conditions concern you
+                    </li>
+                    <li
+                      class="list-group-item border-0 px-0 py-2"
+                      style="background: transparent; color: white"
+                    >
+                      Optionally specify your activity type for tailored advice
+                    </li>
+                    <li
+                      class="list-group-item border-0 px-0 py-2"
+                      style="background: transparent; color: white"
+                    >
+                      Get probability results based on NASA data
+                    </li>
+                  </ol>
+                </div>
+              </div>
+
+              <div class="card mt-3 mt-md-4">
+                <div class="card-header">
+                  <h2 class="h5 mb-0">Data Sources</h2>
+                </div>
+                <div class="card-body">
+                  <ul class="list-unstyled mb-0">
+                    <li class="mb-2">🌡️ Temperature: NASA GISTEMP, MODIS</li>
+                    <li class="mb-2">💨 Wind: NASA MERRA-2, QuikSCAT</li>
+                    <li class="mb-2">🌧️ Precipitation: NASA GPM, TRMM</li>
+                    <li class="mb-2">☁️ Cloud Cover: NASA MODIS, CERES</li>
+                    <li class="mb-0">💧 Humidity: NASA AIRS, MERRA-2</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="card mt-3 mt-md-4">
+                <div class="card-header">
+                  <h2 class="h5 mb-0">Current Conditions</h2>
+                </div>
+                <div class="card-body" id="current-conditions">
+                  <p class="text-muted text-center mb-0">
+                    Search for a location to see current conditions
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Loading Indicator -->
+        <div class="loading" id="loading-indicator">
+          <div class="spinner-border text-nasa" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-3 mb-0">
+            Analyzing historical weather data for your location...
+          </p>
+        </div>
+
+        <!-- Results Section -->
+        <section
+          id="results-section"
+          class="mb-4 mb-md-5"
+          style="display: none"
+        >
+          <div class="card">
+            <div
+              class="card-header d-flex flex-column flex-md-row justify-content-between align-items-center"
+            >
+              <h2 class="h5 mb-2 mb-md-0">Weather Probability Results</h2>
+            </div>
+            <div class="card-body">
+              <div class="row g-3 g-md-4 mb-4">
+                <div class="col-12 col-md-8">
+                  <h3 id="results-location" class="h4 h5-md">Location:</h3>
+                  <p id="results-date" class="text-muted mb-1">Date:</p>
+                  <!-- Data source line is removed from display -->
+                  <p
+                    id="data-source"
+                    class="text-info small mb-0"
+                    style="display: none"
+                  ></p>
+                </div>
+                <div class="col-12 col-md-4 text-center text-md-end">
+                  <div class="alert mb-0" id="overall-risk-alert">
+                    <strong
+                      >Overall Risk Level:
+                      <span id="overall-risk">Low</span></strong
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="row g-3 g-md-4" id="probability-results">
+                <!-- Results will be populated here by JavaScript -->
+              </div>
+
+              <div class="row mt-4">
+                <div class="col-12">
+                  <div class="card result-card">
+                    <div class="card-body">
+                      <h4 class="h5 h6-md">Activity Recommendation</h4>
+                      <p id="activity-recommendation" class="mb-0">
+                        Based on historical weather patterns, your planned
+                        activity has a good chance of favorable conditions.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row g-3 g-md-4 mt-4">
+                <div class="col-12 col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <h5 class="h6 mb-0">Historical Trends</h5>
+                    </div>
+                    <div class="card-body">
+                      <canvas id="trend-chart" height="200"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <h5 class="h6 mb-0">Monthly Averages</h5>
+                    </div>
+                    <div class="card-body">
+                      <canvas id="monthly-chart" height="200"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer>
+        <div class="container">
+          <div class="row g-4 g-md-5">
+            <div class="col-12 col-md-6">
+              <h5>CLIMATE GUARDIANS</h5>
+              <p class="mb-2">NASA Space Apps Challenge 2025 Project</p>
+              <p class="mb-0">
+                Using NASA Earth observation data to help people plan better
+                outdoor experiences.
+              </p>
+            </div>
+            <div class="col-6 col-md-3">
+              <h5>Resources</h5>
+              <ul class="list-unstyled mb-0">
+                <li class="mb-1">
+                  <a
+                    href="https://earthdata.nasa.gov/"
+                    class="text-light"
+                    target="_blank"
+                    >NASA Earth Data</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-6 col-md-3">
+              <h5>Connect</h5>
+              <ul class="list-unstyled mb-0">
+                <li class="mb-1">
+                  <a href="#" class="text-light">GitHub Repository</a>
+                </li>
+                <li class="mb-1">
+                  <a
+                    href="https://www.spaceappschallenge.org/2025/find-a-team/jarvis_001/?tab=members"
+                    class="text-light"
+                    >Project Team</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <hr class="my-4 bg-light" />
+          <div class="text-center">
+            <p class="mb-0">
+              &copy; CLIMATE GUARDIANS Team | NASA Space Apps Challenge 2025
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- App Scripts -->
+    <script src="config/config.js"></script>
+    <script src="js/geocoding.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

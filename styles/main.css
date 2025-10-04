@@ -1,0 +1,942 @@
+:root {
+  --nasa-blue: #0b3d91;
+  --nasa-red: #fc3d21;
+  --nasa-dark: #1a1a2e;
+  --nasa-light-blue: #1e6fba;
+  --space-black: #050510;
+  --star-white: #ffffff;
+  --earth-blue: #1a237e;
+  --earth-dark-blue: #0d1440;
+  --city-gold: #ffd700;
+  --city-yellow: #ffeb3b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--space-black);
+  color: white;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Space Background with Stars */
+.space-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background: linear-gradient(to bottom, #000011, #050520, #0a0a30);
+}
+
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  animation: twinkle 3s infinite alternate;
+}
+
+/* Realistic Night Earth Styles */
+.earth-container {
+  position: fixed;
+  top: 50%;
+  right: -180px;
+  transform: translateY(-50%);
+  width: 650px;
+  height: 650px;
+  z-index: -1;
+  opacity: 0.95;
+}
+
+.earth {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  animation: rotate-earth 60s linear infinite;
+  background: radial-gradient(
+    circle at 30% 40%,
+    #1a237e 0%,
+    #283593 20%,
+    #303f9f 40%,
+    #0d1440 70%,
+    #000000 100%
+  );
+  box-shadow: 0 0 100px rgba(26, 35, 126, 0.8),
+    inset 0 0 100px rgba(0, 0, 0, 0.9);
+}
+
+.earth-base {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background: 
+        /* Continent Shapes - Dark Silhouettes */ radial-gradient(
+      ellipse 25% 18% at 25% 30%,
+      #1b5e20 5%,
+      transparent 12%
+    ),
+    radial-gradient(ellipse 15% 12% at 35% 40%, #1b5e20 4%, transparent 10%),
+    radial-gradient(ellipse 12% 20% at 30% 65%, #1b5e20 6%, transparent 13%),
+    radial-gradient(ellipse 10% 8% at 50% 25%, #1b5e20 3%, transparent 8%),
+    radial-gradient(ellipse 18% 22% at 55% 45%, #1b5e20 7%, transparent 15%),
+    radial-gradient(ellipse 22% 18% at 70% 35%, #1b5e20 8%, transparent 16%),
+    radial-gradient(ellipse 14% 12% at 80% 25%, #1b5e20 5%, transparent 11%),
+    radial-gradient(ellipse 11% 9% at 85% 65%, #1b5e20 4%, transparent 9%);
+  opacity: 0.3;
+}
+
+.earth-lights {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background-image: 
+        /* North America Lights */ radial-gradient(
+      circle at 22% 32%,
+      var(--city-gold) 1px,
+      transparent 2px
+    ),
+    radial-gradient(circle at 25% 35%, var(--city-yellow) 1px, transparent 2px),
+    radial-gradient(circle at 28% 38%, var(--city-gold) 1px, transparent 2px),
+    radial-gradient(circle at 30% 30%, var(--city-yellow) 2px, transparent 3px),
+    radial-gradient(circle at 35% 33%, var(--city-gold) 1px, transparent 2px),
+    /* East Coast USA */
+      radial-gradient(
+        circle at 28% 40%,
+        var(--city-yellow) 2px,
+        transparent 3px
+      ),
+    radial-gradient(circle at 26% 42%, var(--city-gold) 1px, transparent 2px),
+    radial-gradient(circle at 24% 44%, var(--city-yellow) 1px, transparent 2px),
+    /* Europe Lights */
+      radial-gradient(
+        circle at 48% 28%,
+        var(--city-yellow) 2px,
+        transparent 3px
+      ),
+    radial-gradient(circle at 50% 30%, var(--city-gold) 1px, transparent 2px),
+    radial-gradient(circle at 52% 32%, var(--city-yellow) 1px, transparent 2px),
+    radial-gradient(circle at 46% 34%, var(--city-gold) 1px, transparent 2px),
+    /* Asia Lights - Dense clusters */
+      radial-gradient(
+        circle at 68% 38%,
+        var(--city-yellow) 3px,
+        transparent 4px
+      ),
+    radial-gradient(circle at 70% 35%, var(--city-gold) 2px, transparent 3px),
+    radial-gradient(circle at 72% 40%, var(--city-yellow) 2px, transparent 3px),
+    radial-gradient(circle at 74% 36%, var(--city-gold) 1px, transparent 2px),
+    radial-gradient(circle at 76% 42%, var(--city-yellow) 2px, transparent 3px),
+    radial-gradient(circle at 78% 38%, var(--city-gold) 1px, transparent 2px),
+    /* India & Middle East */
+      radial-gradient(
+        circle at 65% 45%,
+        var(--city-yellow) 2px,
+        transparent 3px
+      ),
+    radial-gradient(circle at 67% 48%, var(--city-gold) 1px, transparent 2px),
+    radial-gradient(circle at 62% 50%, var(--city-yellow) 1px, transparent 2px),
+    /* Japan & Korea */
+      radial-gradient(
+        circle at 78% 32%,
+        var(--city-yellow) 2px,
+        transparent 3px
+      ),
+    radial-gradient(circle at 80% 34%, var(--city-gold) 1px, transparent 2px),
+    /* Australia */
+      radial-gradient(
+        circle at 82% 68%,
+        var(--city-yellow) 1px,
+        transparent 2px
+      ),
+    radial-gradient(circle at 84% 70%, var(--city-gold) 1px, transparent 2px),
+    /* South America */
+      radial-gradient(
+        circle at 32% 62%,
+        var(--city-yellow) 1px,
+        transparent 2px
+      ),
+    radial-gradient(circle at 30% 65%, var(--city-gold) 1px, transparent 2px),
+    /* Africa */
+      radial-gradient(
+        circle at 52% 52%,
+        var(--city-yellow) 1px,
+        transparent 2px
+      ),
+    radial-gradient(circle at 50% 55%, var(--city-gold) 1px, transparent 2px);
+  opacity: 0.8;
+  filter: brightness(1.2);
+  animation: lights-flicker 4s ease-in-out infinite alternate;
+}
+
+.earth-clouds {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      rgba(255, 255, 255, 0.1) 1%,
+      transparent 3%
+    ),
+    radial-gradient(
+      circle at 40% 20%,
+      rgba(255, 255, 255, 0.08) 1%,
+      transparent 2%
+    ),
+    radial-gradient(
+      circle at 60% 40%,
+      rgba(255, 255, 255, 0.05) 1%,
+      transparent 2%
+    ),
+    radial-gradient(
+      circle at 75% 25%,
+      rgba(255, 255, 255, 0.07) 1%,
+      transparent 2%
+    );
+  opacity: 0.2;
+  animation: rotate-clouds 40s linear infinite;
+}
+
+.earth-atmosphere {
+  width: 108%;
+  height: 108%;
+  position: absolute;
+  top: -4%;
+  left: -4%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 40%,
+    rgba(33, 150, 243, 0.1) 0%,
+    rgba(13, 71, 161, 0.05) 30%,
+    transparent 70%
+  );
+  box-shadow: inset 0 0 80px rgba(33, 150, 243, 0.15),
+    0 0 100px rgba(33, 150, 243, 0.1);
+  animation: atmospheric-pulse 8s ease-in-out infinite alternate;
+}
+
+.earth-highlight {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 15% 25%,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 10%,
+    transparent 25%
+  );
+  pointer-events: none;
+}
+
+@keyframes rotate-earth {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-clouds {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes atmospheric-pulse {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes lights-flicker {
+  0% {
+    opacity: 0.7;
+    filter: brightness(1.1);
+  }
+  100% {
+    opacity: 0.9;
+    filter: brightness(1.3);
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Content Styling */
+.nasa-header {
+  background: linear-gradient(
+    135deg,
+    rgba(11, 61, 145, 0.95),
+    rgba(26, 26, 46, 0.95)
+  );
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nasa-logo {
+  height: 40px;
+  margin-right: 12px;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+}
+
+.hero-section {
+  background: linear-gradient(
+    135deg,
+    rgba(11, 61, 145, 0.4),
+    rgba(252, 61, 33, 0.2)
+  );
+  color: white;
+  padding: 3rem 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  position: relative;
+  border-radius: 15px;
+  margin: 20px 0;
+  box-shadow: 0 0 30px rgba(11, 61, 145, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(11, 61, 145, 0.3),
+    rgba(252, 61, 33, 0.15)
+  );
+  border-radius: 15px;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  background: rgba(30, 30, 60, 0.9);
+  backdrop-filter: blur(10px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 35px rgba(11, 61, 145, 0.5);
+}
+
+.card-header {
+  background: linear-gradient(135deg, var(--nasa-blue), var(--nasa-light-blue));
+  color: white;
+  border-radius: 12px 12px 0 0 !important;
+  font-weight: 600;
+  padding: 1rem 1.25rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-nasa {
+  background: linear-gradient(135deg, var(--nasa-red), #e0351a);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(252, 61, 33, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+}
+
+.btn-nasa:hover {
+  background: linear-gradient(135deg, #e0351a, var(--nasa-red));
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(252, 61, 33, 0.6);
+}
+
+.btn-nasa:disabled {
+  background: #6c757d;
+  transform: none;
+  box-shadow: none;
+}
+
+#map {
+  height: 300px;
+  border-radius: 8px;
+  z-index: 1;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.probability-indicator {
+  height: 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 12px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.probability-bar {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.6s ease;
+}
+
+.probability-value {
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin: 8px 0;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.parameter-description {
+  font-weight: 500;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.weather-icon {
+  font-size: 1.2rem;
+  margin-right: 8px;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+}
+
+.result-card {
+  border-left: 5px solid var(--nasa-blue);
+  background: linear-gradient(
+    135deg,
+    rgba(30, 30, 60, 0.9),
+    rgba(50, 50, 90, 0.9)
+  );
+}
+
+footer {
+  background: rgba(26, 26, 46, 0.95);
+  color: white;
+  padding: 2rem 0;
+  margin-top: 3rem;
+  backdrop-filter: blur(15px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.loading {
+  display: none;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  background: rgba(30, 30, 60, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  color: var(--nasa-blue);
+}
+
+.current-conditions-card {
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.9),
+    rgba(118, 75, 162, 0.9)
+  );
+  color: white;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.condition-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.condition-item:last-child {
+  border-bottom: none;
+}
+
+.risk-low {
+  background: rgba(40, 167, 69, 0.25);
+  border: 1px solid rgba(40, 167, 69, 0.6);
+  color: #d4edda;
+}
+
+.risk-moderate {
+  background: rgba(255, 193, 7, 0.25);
+  border: 1px solid rgba(255, 193, 7, 0.6);
+  color: #fff3cd;
+}
+
+.risk-high {
+  background: rgba(220, 53, 69, 0.25);
+  border: 1px solid rgba(220, 53, 69, 0.6);
+  color: #f8d7da;
+}
+
+.weather-condition-icon {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.5));
+}
+
+.temperature-display {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+.condition-description {
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.additional-info {
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+/* Fixed Form Elements - Dropdown Colors */
+.form-control,
+.form-select {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--nasa-blue);
+  box-shadow: 0 0 0 0.25rem rgba(11, 61, 145, 0.25);
+  color: white;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-check-input:checked {
+  background-color: var(--nasa-blue);
+  border-color: var(--nasa-blue);
+}
+
+.form-label {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+/* Fix dropdown options background and text color */
+.form-select option {
+  background: rgba(30, 30, 60, 0.98);
+  color: white;
+  padding: 10px;
+}
+
+/* Fix for Bootstrap dropdown contrast */
+.dropdown-menu {
+  background: rgba(30, 30, 60, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(15px);
+  border-radius: 8px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-item {
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin: 2px 6px;
+  width: calc(100% - 12px);
+  font-size: 0.95rem;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background: rgba(11, 61, 145, 0.6);
+  color: white;
+}
+
+/* Input group fixes */
+.input-group-text {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+/* Responsive adjustments */
+/* Mobile First Approach */
+
+/* Extra small devices (phones, 576px and down) */
+@media (max-width: 576px) {
+  .content-wrapper {
+    margin: 10px;
+    border-radius: 12px;
+  }
+
+  .nasa-header {
+    padding: 0.75rem 0;
+  }
+
+  .nasa-logo {
+    height: 35px;
+    margin-right: 8px;
+  }
+
+  .hero-section {
+    padding: 2rem 0.5rem;
+    margin: 15px 0;
+    border-radius: 10px;
+  }
+
+  .hero-section h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-section .lead {
+    font-size: 1rem;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+    border-radius: 8px;
+  }
+
+  .card-header {
+    padding: 0.875rem 1rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  #map {
+    height: 250px;
+  }
+
+  .probability-value {
+    font-size: 1.25rem;
+  }
+
+  .temperature-display {
+    font-size: 2rem;
+  }
+
+  .weather-condition-icon img {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .btn-nasa {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  footer {
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .content-wrapper {
+    margin: 15px;
+  }
+
+  .btn-nasa {
+    width: auto;
+  }
+
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .content-wrapper {
+    margin: 20px;
+  }
+
+  .nasa-header {
+    padding: 1rem 0;
+  }
+
+  .hero-section {
+    padding: 3rem 2rem;
+  }
+
+  .hero-section h1 {
+    font-size: 2.25rem;
+  }
+
+  #map {
+    height: 350px;
+  }
+
+  .card-body {
+    padding: 1.25rem;
+  }
+
+  .temperature-display {
+    font-size: 2.5rem;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .content-wrapper {
+    margin: 25px;
+  }
+
+  .hero-section {
+    padding: 4rem 2rem;
+  }
+
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  #map {
+    height: 400px;
+  }
+
+  .earth-container {
+    display: block;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .hero-section h1 {
+    font-size: 3rem;
+  }
+
+  .container {
+    max-width: 1140px;
+  }
+}
+
+/* Hide Earth on smaller screens */
+@media (max-width: 991.98px) {
+  .earth-container {
+    display: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .nasa-header,
+  footer,
+  .btn,
+  #download-btn {
+    display: none !important;
+  }
+
+  .card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .space-background,
+  .stars,
+  .earth-container {
+    display: none;
+  }
+}
+
+/* Animation for results */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Utility classes for better mobile experience */
+.mobile-text-center {
+  text-align: center;
+}
+
+.mobile-mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mobile-p-2 {
+  padding: 0.5rem;
+}
+
+/* Ensure images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fix for Bootstrap grid on mobile */
+.row {
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+}
+
+.col,
+.col-1,
+.col-10,
+.col-11,
+.col-12,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-auto,
+.col-lg,
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-auto,
+.col-md,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-auto,
+.col-sm,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-auto,
+.col-xl,
+.col-xl-1,
+.col-xl-10,
+.col-xl-11,
+.col-xl-12,
+.col-xl-2,
+.col-xl-3,
+.col-xl-4,
+.col-xl-5,
+.col-xl-6,
+.col-xl-7,
+.col-xl-8,
+.col-xl-9,
+.col-xl-auto {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
