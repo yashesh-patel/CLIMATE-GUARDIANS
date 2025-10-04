@@ -43,21 +43,3 @@ Built for the **NASA Space Apps Challenge 2025**, this project empowers users to
 
 ---
 
-## 🔑 **Configuration**
-
-Edit the file **`config/config.js`** to set your API key and default settings:
-
-```js
-const CONFIG = {
-  openWeatherApiKey: "YOUR_OPENWEATHER_API_KEY",
-  map: {
-    defaultCenter: [40.7128, -74.006], // Default: New York
-    defaultZoom: 10,
-  },
-  endpoints: {
-    geocoding: "https://nominatim.openstreetmap.org/search",
-    reverseGeocoding: "https://nominatim.openstreetmap.org/reverse",
-    historicalWeather: "https://archive-api.open-meteo.com/v1/archive",
-    currentWeather: "https://api.openweathermap.org/data/2.5/weather",
-  },
-};
