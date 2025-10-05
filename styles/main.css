@@ -27,7 +27,7 @@ body {
   padding: 0;
 }
 
-/* Space Background with Stars */
+/*. . Space Background with Stars */
 .space-background {
   position: fixed;
   top: 0;
@@ -940,3 +940,4 @@ img {
   padding-right: 0.5rem;
   padding-left: 0.5rem;
 }
+
